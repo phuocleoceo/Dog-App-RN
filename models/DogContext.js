@@ -18,6 +18,13 @@ export default class DogContext extends BaseModel
         return "dog";
     }
 
+    static searchDog(name)
+    {
+        const sql = `SELECT * FROM dog WHERE name LIKE '%${name}%'`;
+        const params = [];
+        return this.repository.databaseLayer.executeSql(sql, params).then(({ rows }) => rows);
+    }
+
     static get columnMapping()
     {
         return {

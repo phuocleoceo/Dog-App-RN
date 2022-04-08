@@ -18,7 +18,7 @@ export default function Navigation()
 
     // useEffect(() => Drop_Table_Dog(), []);
 
-    useEffect(() => Destroy_All_Dog(), []);
+    // useEffect(() => Destroy_All_Dog(), []);
 
     useEffect(() => Get_Dog_From_DB(), []);
 

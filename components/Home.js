@@ -12,8 +12,8 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 export default function Home({ navigation })
 {
-    const { listDog, searchDog } = useSelector(state => state.dog);
-    const { Get_Dog_By_Id, Set_Search_Dog } = useDog();
+    const { listDog } = useSelector(state => state.dog);
+    const { Get_Dog_By_Id } = useDog();
 
     const handlePressCard = (id) =>
     {

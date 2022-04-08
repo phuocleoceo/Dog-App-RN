@@ -1,17 +1,17 @@
 import { Appbar, Searchbar } from 'react-native-paper';
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
 import useDog from "../hooks/useDog";
 
 
 export default function CustomNavigationBar({ navigation, back })
 {
-    const { isSearching } = useSelector(state => state.dog);
-    const { Set_Searching, Set_Search_Dog } = useDog();
+    const [isSearching, setIsSearching] = useState(false);
+    const { Set_Search_Dog } = useDog();
 
     const handleShow = () =>
     {
         if (isSearching) Set_Search_Dog("");
-        Set_Searching();
+        setIsSearching(!isSearching);
     };
 
     const handleSearch = (query) => Set_Search_Dog(query);

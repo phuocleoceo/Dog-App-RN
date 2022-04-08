@@ -1,12 +1,11 @@
-import { SET_CURRENT_DOG, SET_LIST_DOG, SET_SEARCHING, SET_SEARCH_DOG } from "../redux/slices/dogSlice";
-import { useDispatch, useSelector } from 'react-redux';
+import { SET_CURRENT_DOG, SET_LIST_DOG } from "../redux/slices/dogSlice";
 import DogContext from "../models/DogContext";
 import DogEntity from "../models/DogEntity";
 import { GET_DOG_API } from "../api/apiDog";
+import { useDispatch } from 'react-redux';
 
 export default function useDog()
 {
-    const { isSearching } = useSelector(state => state.dog);
     const dispatch = useDispatch();
 
     const Create_Table_Dog = async () =>
@@ -45,20 +44,10 @@ export default function useDog()
         dispatch(SET_CURRENT_DOG(new DogEntity(dogAPI)));
     };
 
-    const Set_Searching = () =>
-    {
-        dispatch(SET_SEARCHING(!isSearching));
-    };
-
     const Set_Search_Dog = async (name) =>
     {
-        const searchList = await DogContext.query({
-            columns: "name",
-            where: {
-                name_cont: name
-            }
-        });
-        dispatch(SET_SEARCH_DOG(searchList));
+        const searchList = await DogContext.searchDog(name);
+        dispatch(SET_LIST_DOG(searchList));
     };
 
     const Destroy_All_Dog = () =>
@@ -68,6 +57,6 @@ export default function useDog()
 
     return {
         Create_Table_Dog, Drop_Table_Dog, Get_Dog_From_API, Get_Dog_From_DB,
-        Get_Dog_By_Id, Set_Searching, Set_Search_Dog, Destroy_All_Dog
+        Get_Dog_By_Id, Set_Search_Dog, Destroy_All_Dog
     };
 }
