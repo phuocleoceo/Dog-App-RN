@@ -14,9 +14,9 @@ export default function useDog()
         console.log(">> Created table Dog !");
     };
 
-    const Drop_Table_Dog = () =>
+    const Drop_Table_Dog = async () =>
     {
-        DogContext.dropTable();
+        await DogContext.dropTable();
     };
 
     const Get_Dog_From_API = async () =>
@@ -41,7 +41,16 @@ export default function useDog()
     const Get_Dog_By_Id = async (id) =>
     {
         const dogAPI = await DogContext.find(id);
-        dispatch(SET_CURRENT_DOG(new DogEntity(dogAPI)));
+        dispatch(SET_CURRENT_DOG({
+            id: dogAPI.id, name: dogAPI.name,
+            bred_for: dogAPI.bred_for, breed_group: dogAPI.breed_group,
+            life_span: dogAPI.life_span, origin: dogAPI.origin,
+            temperament: dogAPI.temperament, url: dogAPI.url,
+            height_imperial: dogAPI.height_imperial, height_metric: dogAPI.height_metric,
+            weight_imperial: dogAPI.weight_imperial, weight_metric: dogAPI.weight_metric
+        }));
+        // Lỗi Serialize làm app delay nhiều
+        // dispatch(SET_CURRENT_DOG(new DogEntity(dogAPI)));
     };
 
     const Set_Search_Dog = async (name) =>

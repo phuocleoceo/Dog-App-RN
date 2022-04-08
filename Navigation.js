@@ -16,11 +16,11 @@ export default function Navigation()
 
     useEffect(() => Create_Table_Dog(), []);
 
+    useEffect(() => Get_Dog_From_DB(), []);
+
     // useEffect(() => Drop_Table_Dog(), []);
 
     // useEffect(() => Destroy_All_Dog(), []);
-
-    useEffect(() => Get_Dog_From_DB(), []);
 
     return (
         <NavigationContainer>

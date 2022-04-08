@@ -10,9 +10,11 @@ export default class DogEntity
         this.origin = dogAPI.origin;
         this.temperament = dogAPI.temperament;
         this.url = dogAPI.url;
-        this.height_imperial = dogAPI.height_imperial;
-        this.height_metric = dogAPI.height_metric;
-        this.weight_imperial = dogAPI.weight_imperial;
-        this.weight_metric = dogAPI.weight_metric;
+        this.height_imperial = isUdf(dogAPI.height) ? "" : dogAPI.height.imperial;
+        this.height_metric = isUdf(dogAPI.height) ? "" : dogAPI.height.metric;
+        this.weight_imperial = isUdf(dogAPI.weight) ? "" : dogAPI.weight.imperial;
+        this.weight_metric = isUdf(dogAPI.weight) ? "" : dogAPI.weight.metric;
     }
 }
+
+const isUdf = (field) => typeof field === "undefined";
