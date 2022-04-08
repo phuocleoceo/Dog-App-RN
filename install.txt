@@ -1,4 +1,4 @@
-@react-navigation/native @react-navigation/native-stack react-redux @reduxjs/toolkit 
+@react-navigation/native @react-navigation/native-stack react-redux @reduxjs/toolkit axios query-string
 
 recyclerlistview react-native-paper react-native-vector-icons react-native-swiper 
 

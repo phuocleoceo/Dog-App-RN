@@ -1,6 +1,7 @@
 import { SET_CURRENT_DOG, SET_LIST_DOG, SET_SEARCHING, SET_SEARCH_DOG } from "../redux/slices/dogSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import DogContext from "../models/DogContext";
+import { GET_DOG_API } from "../api/apiDog";
 
 export default function useDog()
 {
@@ -20,29 +21,19 @@ export default function useDog()
 
     const Get_Dog_From_API = async () =>
     {
-        try
+        const dog_api = await GET_DOG_API();
+        dog_api.forEach(dog =>
         {
-            console.log(">> Load Dog from API");
-            const API_URL = "https://raw.githubusercontent.com/DevTides/DogsApi/master/dogs.json";
-            const response = await fetch(API_URL);
-            const responseJSON = await response.json();
-            responseJSON.forEach(dog =>
-            {
-                const { id, name, bred_for, breed_group,
-                    life_span, origin, temperament, url } = dog;
-                const { imperial: height_imperial, metric: height_metric } = dog.height;
-                const { imperial: weight_imperial, metric: weight_metric } = dog.weight;
-                DogContext.create({
-                    id, name, bred_for, breed_group, life_span, origin, temperament,
-                    url, height_imperial, height_metric, weight_imperial, weight_metric
-                });
+            const { id, name, bred_for, breed_group,
+                life_span, origin, temperament, url } = dog;
+            const { imperial: height_imperial, metric: height_metric } = dog.height;
+            const { imperial: weight_imperial, metric: weight_metric } = dog.weight;
+            DogContext.create({
+                id, name, bred_for, breed_group, life_span, origin, temperament,
+                url, height_imperial, height_metric, weight_imperial, weight_metric
             });
-            dispatch(SET_LIST_DOG(await DogContext.query()));
-        }
-        catch
-        {
-            console.log(">> Error when get dog from API");
-        }
+        });
+        dispatch(SET_LIST_DOG(await DogContext.query()));
     }
 
     const Get_Dog_From_DB = async () =>
