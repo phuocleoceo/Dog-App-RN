@@ -10,9 +10,9 @@ export default class DogEntity
         this.origin = dogAPI.origin;
         this.temperament = dogAPI.temperament;
         this.url = dogAPI.url;
-        this.height_imperial = dogAPI.height.imperial;
-        this.height_metric = dogAPI.height.metric;
-        this.weight_imperial = dogAPI.weight.imperial;
-        this.weight_metric = dogAPI.weight.metric;
+        this.height_imperial = dogAPI.height_imperial;
+        this.height_metric = dogAPI.height_metric;
+        this.weight_imperial = dogAPI.weight_imperial;
+        this.weight_metric = dogAPI.weight_metric;
     }
 }

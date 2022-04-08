@@ -2,6 +2,7 @@ import { RecyclerListView, DataProvider, LayoutProvider } from 'recyclerlistview
 import { Card, IconButton, Title, Paragraph } from 'react-native-paper';
 import { StyleSheet, View, Dimensions } from 'react-native';
 import React, { useState, useEffect } from 'react';
+import DogEntity from '../models/DogEntity';
 import { useSelector } from 'react-redux';
 import Swiper from "react-native-swiper";
 import useDog from "../hooks/useDog";
@@ -39,31 +40,31 @@ export default function Home({ navigation })
 
     const _rowRenderer = (type, data) => 
     {
-        const { id, name, bred_for, url, origin, life_span, temperament } = data;
+        const dog = new DogEntity(data);
         return (
-            <Swiper key={id}
+            <Swiper key={dog.id}
                 style={styles.wrapper}
                 showsButtons={false}
                 showsPagination={false}
                 loop={false}
             >
-                <Card style={styles.dogItem} onPress={() => handlePressCard(id)}>
-                    <Card.Cover source={{ uri: url }} />
+                <Card style={styles.dogItem} onPress={() => handlePressCard(dog.id)}>
+                    <Card.Cover source={{ uri: dog.url }} />
                     <Card.Title
-                        title={name}
-                        subtitle={bred_for}
+                        title={dog.name}
+                        subtitle={dog.bred_for}
                         right={() => <IconButton icon="heart" />}
                     />
                 </Card>
                 <Card style={styles.dogDetail} onPress={() => handlePressCard(id)}>
                     <Card.Content>
-                        <Title style={styles.detailTitle}>{name}</Title>
+                        <Title style={styles.detailTitle}>{dog.name}</Title>
                         <Paragraph style={styles.detailLabel}>Origin:</Paragraph>
-                        <Paragraph style={styles.detailContent}>{origin}</Paragraph>
+                        <Paragraph style={styles.detailContent}>{dog.origin}</Paragraph>
                         <Paragraph style={styles.detailLabel}>Life Span:</Paragraph>
-                        <Paragraph style={styles.detailContent}>{life_span}</Paragraph>
+                        <Paragraph style={styles.detailContent}>{dog.life_span}</Paragraph>
                         <Paragraph style={styles.detailLabel}>Temperament:</Paragraph>
-                        <Paragraph style={styles.detailContent}>{temperament}</Paragraph>
+                        <Paragraph style={styles.detailContent}>{dog.temperament}</Paragraph>
                     </Card.Content>
                 </Card>
             </Swiper>
