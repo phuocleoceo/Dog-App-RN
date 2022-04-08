@@ -5,8 +5,8 @@ import React from 'react';
 
 export default function Detail()
 {
-    const { currentDog: { name, url, bred_for, breed_group, life_span,
-        origin, temperament, height, weight } } = useSelector(state => state.dog);
+    const { currentDog: { name, url, bred_for, breed_group, life_span, origin,
+        temperament, height_metric, weight_metric } } = useSelector(state => state.dog);
 
     return (
         <ScrollView style={styles.container}>
@@ -45,12 +45,12 @@ export default function Detail()
 
             <View style={styles.formControl}>
                 <Text style={styles.formLabel}>Height:</Text>
-                <Text style={styles.formContent}>{height.metric}</Text>
+                <Text style={styles.formContent}>{height_metric}</Text>
             </View>
 
             <View style={styles.formControl}>
                 <Text style={styles.formLabel}>Weight:</Text>
-                <Text style={styles.formContent}>{weight.metric}</Text>
+                <Text style={styles.formContent}>{weight_metric}</Text>
             </View>
         </ScrollView >
     )
