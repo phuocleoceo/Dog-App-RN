@@ -11,7 +11,8 @@ const Stack = createNativeStackNavigator();
 
 export default function Navigation()
 {
-    const { Create_Table_Dog, Drop_Table_Dog, Get_Dog_From_DB, Destroy_All_Dog } = useDog();
+    const { Create_Table_Dog, Drop_Table_Dog,
+        Get_Dog_From_DB, Destroy_All_Dog } = useDog();
 
     useEffect(() => Create_Table_Dog(), []);
 

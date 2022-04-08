@@ -1,6 +1,7 @@
 import { SET_CURRENT_DOG, SET_LIST_DOG, SET_SEARCHING, SET_SEARCH_DOG } from "../redux/slices/dogSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import DogContext from "../models/DogContext";
+import DogEntity from "../models/DogEntity";
 import { GET_DOG_API } from "../api/apiDog";
 
 export default function useDog()
@@ -21,17 +22,10 @@ export default function useDog()
 
     const Get_Dog_From_API = async () =>
     {
-        const dog_api = await GET_DOG_API();
-        dog_api.forEach(dog =>
+        const { data: dog_api } = await GET_DOG_API();
+        dog_api.forEach(dogAPI =>
         {
-            const { id, name, bred_for, breed_group,
-                life_span, origin, temperament, url } = dog;
-            const { imperial: height_imperial, metric: height_metric } = dog.height;
-            const { imperial: weight_imperial, metric: weight_metric } = dog.weight;
-            DogContext.create({
-                id, name, bred_for, breed_group, life_span, origin, temperament,
-                url, height_imperial, height_metric, weight_imperial, weight_metric
-            });
+            DogContext.create(new DogEntity(dogAPI));
         });
         dispatch(SET_LIST_DOG(await DogContext.query()));
     }
@@ -47,8 +41,8 @@ export default function useDog()
 
     const Get_Dog_By_Id = async (id) =>
     {
-        const dog = await DogContext.find(id);
-        dispatch(SET_CURRENT_DOG(dog));
+        const dogAPI = await DogContext.find(id);
+        dispatch(SET_CURRENT_DOG(new DogEntity(dogAPI)));
     };
 
     const Set_Searching = () =>
@@ -58,8 +52,6 @@ export default function useDog()
 
     const Set_Search_Dog = async (name) =>
     {
-        // const searchList = listDog.filter(c =>
-        //     c.name.toLowerCase().indexOf(name.toLowerCase()) > -1);
         const searchList = await DogContext.query({
             columns: "name",
             where: {
