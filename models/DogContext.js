@@ -40,6 +40,7 @@ export default class DogContext extends BaseModel
             height_metric: { type: types.TEXT },
             weight_imperial: { type: types.TEXT },
             weight_metric: { type: types.TEXT },
+            isHeart: { type: types.INTEGER }
         }
     }
 }

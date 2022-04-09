@@ -13,12 +13,18 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 export default function Home({ navigation })
 {
     const { listDog } = useSelector(state => state.dog);
-    const { Get_Dog_By_Id } = useDog();
+    const { Get_Dog_By_Id, Set_Heart, Get_Dog_From_DB } = useDog();
 
     const handlePressCard = async (id) =>
     {
         await Get_Dog_By_Id(id);
         navigation.navigate("Detail");
+    };
+
+    const handleSetHeart = async (id) =>
+    {
+        await Set_Heart(id);
+        await Get_Dog_From_DB();
     };
 
     //---------------------------------------------------------------------------
@@ -38,6 +44,7 @@ export default function Home({ navigation })
         (index) => _dataProvider.getDataForIndex(index),
         (type, dim) => { dim.width = currentWidth / 2 - 5; dim.height = 300; })
 
+
     const _rowRenderer = (type, data) => 
     {
         const dog = new DogEntity(data);
@@ -53,7 +60,10 @@ export default function Home({ navigation })
                     <Card.Title
                         title={dog.name}
                         subtitle={dog.bred_for}
-                        right={() => <IconButton icon="heart" />}
+                        right={() =>
+                            dog.isHeart === 0 ?
+                                <IconButton icon="heart" onPress={() => { handleSetHeart(dog.id); console.log(dog.isHeart) }} /> :
+                                <IconButton icon="camera" onPress={() => handleSetHeart(dog.id)} />}
                     />
                 </Card>
                 <Card style={styles.dogDetail} onPress={() => handlePressCard(id)}>

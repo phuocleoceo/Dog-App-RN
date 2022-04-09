@@ -18,9 +18,9 @@ export default function Navigation()
 
     useEffect(() => Get_Dog_From_DB(), []);
 
-    // useEffect(() => Drop_Table_Dog(), []);
-
     // useEffect(() => Destroy_All_Dog(), []);
+
+    // useEffect(() => Drop_Table_Dog(), []);
 
     return (
         <NavigationContainer>

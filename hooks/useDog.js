@@ -78,8 +78,18 @@ export default function useDog()
         await DogContext.destroyAll();
     };
 
+    const Set_Heart = async (id) =>
+    {
+        const dog = await DogContext.find(id);
+        let isHeart = 0;
+        if (dog.isHeart === 0) isHeart = 1;
+        else isHeart = 0;
+        const updateDog = { ...dog, isHeart };
+        await DogContext.update(updateDog);
+    };
+
     return {
         Create_Table_Dog, Drop_Table_Dog, Get_Dog_From_API, Get_Dog_From_DB, Get_Dog_By_Id,
-        Set_Search_Dog, Destroy_All_Dog, Create_Dog, Update_Dog, Delete_Dog
+        Set_Search_Dog, Destroy_All_Dog, Create_Dog, Update_Dog, Delete_Dog, Set_Heart
     };
 }

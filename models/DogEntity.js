@@ -14,6 +14,7 @@ export default class DogEntity
         this.height_metric = isUdf(dogAPI.height) ? "" : dogAPI.height.metric;
         this.weight_imperial = isUdf(dogAPI.weight) ? "" : dogAPI.weight.imperial;
         this.weight_metric = isUdf(dogAPI.weight) ? "" : dogAPI.weight.metric;
+        this.isHeart = 0;
     }
 }
 
