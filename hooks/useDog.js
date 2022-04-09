@@ -59,13 +59,27 @@ export default function useDog()
         dispatch(SET_LIST_DOG(searchList));
     };
 
-    const Destroy_All_Dog = () =>
+    const Create_Dog = async (dog) =>
     {
-        DogContext.destroyAll();
+        await DogContext.create(dog);
+    };
+    const Update_Dog = async (dog) =>
+    {
+        await DogContext.update(dog);
+    };
+
+    const Delete_Dog = async (id) =>
+    {
+        await DogContext.destroy(id);
+    };
+
+    const Destroy_All_Dog = async () =>
+    {
+        await DogContext.destroyAll();
     };
 
     return {
-        Create_Table_Dog, Drop_Table_Dog, Get_Dog_From_API, Get_Dog_From_DB,
-        Get_Dog_By_Id, Set_Search_Dog, Destroy_All_Dog
+        Create_Table_Dog, Drop_Table_Dog, Get_Dog_From_API, Get_Dog_From_DB, Get_Dog_By_Id,
+        Set_Search_Dog, Destroy_All_Dog, Create_Dog, Update_Dog, Delete_Dog
     };
 }

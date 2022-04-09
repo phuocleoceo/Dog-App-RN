@@ -15,9 +15,9 @@ export default function Home({ navigation })
     const { listDog } = useSelector(state => state.dog);
     const { Get_Dog_By_Id } = useDog();
 
-    const handlePressCard = (id) =>
+    const handlePressCard = async (id) =>
     {
-        Get_Dog_By_Id(id);
+        await Get_Dog_By_Id(id);
         navigation.navigate("Detail");
     };
 
